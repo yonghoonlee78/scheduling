@@ -42,13 +42,26 @@ export class EthersService {
 
   async getBalance() {
     // Todo: account1의 잔액(balance)을 리턴합니다.
+    return await this.provider.getBalance(this.account1.address);
   }
 
   async send1ETH(nonce: number) {
     // Todo: account1이 account2에게 1ETH를 전송해야 합니다.
+    const transaction = {
+      to: this.account2.address,
+      value: parseEther('1'),
+      nonce: nonce,
+    };
+    return await this.account1.sendTransaction(transaction);
   }
+
 
   async send30ETH() {
     // Todo: account2가 account1에게 30ETH를 전송해야 합니다.
+    const transaction = {
+      to: this.account1.address,
+      value: parseEther('30'),
+    };
+    return await this.account2.sendTransaction(transaction);
   }
 }
